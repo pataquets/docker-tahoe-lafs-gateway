@@ -1,0 +1,17 @@
+gateway:
+  image: pataquets/tahoe-lafs-gateway
+  links:
+    - storage
+  ports:
+    - 127.0.0.1:3456:3456
+    - 127.0.0.1:8022:8022
+  volumes:
+    - ./private/accounts:/root/.tahoe/private/accounts:ro
+    - ./private/convergence:/root/.tahoe/private/convergence:ro
+    - ./private/servers.yaml:/root/.tahoe/private/servers.yaml:ro
+
+storage:
+  image: pataquets/tahoe-lafs-storage
+  ports:
+    - 127.0.0.1::3456
+    - 27577:27577
